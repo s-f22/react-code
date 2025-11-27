@@ -1,0 +1,19 @@
+.botaoModalCancelar{
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: var(--corBackground);
+  font-size: 24px;
+  font-family: var(--fontComplementar);
+  box-shadow: 0 4px 4px 0 #000025;
+  cursor: pointer;
+}
+
+.botaoSubmitModal{
+  padding: 10px 100px;
+  border-radius: 10px;
+  background-color: var(--corPrincipal);
+  font-size: 24px;
+  font-family: var(--fontComplementar);
+  box-shadow: 0 4px 4px 0 #000025;
+  cursor: pointer;
+}
