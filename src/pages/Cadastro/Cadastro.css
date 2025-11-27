@@ -1,0 +1,219 @@
+/* CADASTRO */
+.container_lista,
+.container_cadastro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_lista h2,
+.container_cadastro h2 {
+  font-size: 48px;
+  margin-top: 100px;
+}
+
+.container_lista hr,
+.container_cadastro hr {
+  width: 300px;
+  height: 4px;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--corPrincipal);
+  margin-bottom: 100px;
+}
+
+.box_cadastro {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1440px;
+  /* background-color: aquamarine; */
+}
+
+.cadastro_coluna1 {
+  /* background-color: lightgreen; */
+  width: 45%;
+}
+
+.cadastro_coluna2 {
+  /* background-color: lightskyblue; */
+  width: 45%;
+}
+
+.categoria_img {
+  display: flex;
+  justify-content: space-between;
+}
+
+.valor_peso {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cadastro_coluna2,
+.peso,
+.valor,
+.img,
+.categoria,
+.bolos {
+  display: flex;
+  flex-direction: column;
+}
+
+.box_cadastro label {
+  font-size: 20px;
+}
+
+.box_cadastro input[type="text"],
+.box_cadastro textarea {
+  border-radius: 10px;
+  border: solid 1px #B3B3B3;
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.box_cadastro input[type="text"] {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.categoria {
+  width: 70%;
+}
+
+.box_cadastro textarea {
+  resize: none;
+  height: 200px;
+}
+
+.container_cadastro input[type="button"] {
+  font-size: 26px;
+  margin: 50px 0;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--corPrincipal);
+  padding: 10px 200px;
+  box-shadow: 0 4px 4px 2px #00000025;
+  cursor: pointer;
+}
+
+.img {
+  width: 20%;
+}
+
+.img svg {
+  width: 30px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.img div {
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: solid 1px #B3B3B3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+}
+
+.valor {
+  width: 50%;
+}
+
+.peso {
+  width: 40%;
+}
+
+
+
+
+
+/* LISTA */
+table {
+  /* background-color: aquamarine; */
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: solid 2px var(--corPrincipal);
+  padding: 0 3px 5px 3px;
+  font-size: 18px;
+}
+
+td {
+  padding: 10px 3px 5px 3px;
+  border-bottom: solid 2px #B3B3B350;
+}
+
+table svg {
+  width: 30px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* MEDIA */
+@media screen and (max-width: 1000px) {
+  table {
+    width: 98%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .box_cadastro {
+    flex-direction: column;
+  }
+
+  .cadastro_coluna1,
+  .cadastro_coluna2 {
+    width: 100%;
+  }
+
+  .container_cadastro input[type="button"] {
+    padding: 10px 100px;
+  }
+
+  /* LISTA */
+  table {
+    text-align: left;
+    max-width: 460px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    border-radius: var(--arredondamento);
+    border: solid 1px var(--corPrincipal);
+    box-shadow: var(--sombra);
+  }
+
+  td {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-cell);
+    font-weight: 600;
+    border-bottom: solid 2px #B3B3B350;
+  }
+
+  td:last-child {
+    align-self: flex-end;
+  }
+
+}
