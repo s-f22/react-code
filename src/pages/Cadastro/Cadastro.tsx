@@ -3,18 +3,44 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import './Cadastro.css'
 import type { Bolo } from '../../types/Bolo';
-import { getBolos } from '../../services/bolosService';
+import { deleteBolo, getBolos } from '../../services/bolosService';
 import { formatosService } from '../../services/formatosService';
+import ModalCustomizado from '../../components/ModalCustomizado/ModalCustomizado';
 
 export default function Cadastro() {
 
   const [bolos, setBolos] = useState<Bolo[]>([]);
   const [clicouNaLixeira, setClicouNaLixeira] = useState<boolean>(false);
   const [idParaDeletar, setIdParaDeletar] = useState<string>("");
+  const [aposConfirmacaoDeBoloRemovido, setAposConfirmacaoDeBoloRemovido] = useState<boolean>(false);
+  const [propsModalDeErroOuSucesso, setPropsModalDeErroOuSucesso] = useState< { exibir: boolean, titulo: string, corpo: string } >( {exibir: false, titulo: "", corpo: ""} );
 
   const abrirModalParaConfirmarDelete = (id: string) =>{
     setClicouNaLixeira(true);
     setIdParaDeletar(id);
+  }
+
+  const fecharModalConfirmacaoDelete = () => {
+    setClicouNaLixeira(false);
+  }
+
+  const fecharModalDeErroOuSucesso = () => {
+    setPropsModalDeErroOuSucesso({ ...propsModalDeErroOuSucesso, exibir: false }); // ...spread operator
+  }
+
+  const exibirModalDeErroOuSucesso = (titulo: string, corpo: string) => {
+    setPropsModalDeErroOuSucesso( { exibir: true, titulo, corpo  } );
+  }
+
+  const removerItemAposConfirmacao = async (id: string) => {
+    try {
+      await deleteBolo(id);
+      setAposConfirmacaoDeBoloRemovido(true);
+      await fetchBolos();
+      fecharModalConfirmacaoDelete();
+    } catch (error) {
+      exibirModalDeErroOuSucesso("Erro", "Erro ao deletar o bolo");
+    }
   }
 
   const fetchBolos = async () => {
@@ -130,6 +156,30 @@ export default function Cadastro() {
         </section>
       </main>
       <Footer />
+      <ModalCustomizado 
+        mostrarModalQuando={clicouNaLixeira}
+        aoCancelar={fecharModalConfirmacaoDelete}
+        titulo='Confirmar exclusão'
+        corpo='Tem certeza que deseja remover este item?'
+        customizarBotoes={true}
+        textoBotaoConfirmacao='Excluir'
+        textoBotaoCancelamento='Cancelar'
+        aoConfirmar={() => removerItemAposConfirmacao(idParaDeletar)}
+        exibirConteudoCentralizado={true}      
+      />
+      <ModalCustomizado 
+        mostrarModalQuando={aposConfirmacaoDeBoloRemovido}
+        aoCancelar={() => setAposConfirmacaoDeBoloRemovido(false)}
+        titulo='Sucesso'
+        corpo='Bolo removido!'
+      />
+      <ModalCustomizado 
+        mostrarModalQuando={propsModalDeErroOuSucesso.exibir}
+        aoCancelar={fecharModalDeErroOuSucesso}
+        titulo={propsModalDeErroOuSucesso.titulo}
+        corpo={propsModalDeErroOuSucesso.corpo}
+        exibirConteudoCentralizado={true}
+      />
     </>
   )
 }
