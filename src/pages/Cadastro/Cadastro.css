@@ -86,13 +86,13 @@
   height: 200px;
 }
 
-.container_cadastro input[type="button"] {
+.botaoSubmit {
   font-size: 26px;
   margin: 50px 0;
   border-radius: 10px;
   border: none;
   background-color: var(--corPrincipal);
-  padding: 10px 200px;
+  padding: 10px 100px;
   box-shadow: 0 4px 4px 2px #00000025;
   cursor: pointer;
 }
@@ -178,9 +178,7 @@ table svg {
     width: 100%;
   }
 
-  .container_cadastro input[type="button"] {
-    padding: 10px 100px;
-  }
+  
 
   /* LISTA */
   table {

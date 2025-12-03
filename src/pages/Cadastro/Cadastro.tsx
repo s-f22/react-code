@@ -3,7 +3,7 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import './Cadastro.css'
 import type { Bolo } from '../../types/Bolo';
-import { deleteBolo, enviarFotoParaAPI, getBolos } from '../../services/bolosService';
+import { deleteBolo, enviarFotoParaAPI, getBolos, postBolo } from '../../services/bolosService';
 import { formatosService } from '../../services/formatosService';
 import ModalCustomizado from '../../components/ModalCustomizado/ModalCustomizado';
 import { NumericFormat } from 'react-number-format';
@@ -73,6 +73,16 @@ export default function Cadastro() {
     }
   }
 
+  const limparDados = () => {
+    setNomeBolo("");
+    setCategorias("");
+    setImagem(undefined);
+    setPreco(undefined);
+    setPeso(undefined);
+    setDescricao("");
+    setBgImageInputColor("#ffffff");
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -103,8 +113,11 @@ export default function Cadastro() {
 
     try {
       await postBolo(novoBolo);
+      exibirModalDeErroOuSucesso("Sucesso", "Novo bolo cadastrado com sucesso!");
+      fetchBolos();
+      limparDados();
     } catch (error) {
-      
+      exibirModalDeErroOuSucesso("Erro", "Erro ao cadastrar o novo bolo");
     }
 
   }

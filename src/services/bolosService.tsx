@@ -33,5 +33,13 @@ export const enviarFotoParaAPI = async (file: File): Promise<string | undefined>
     console.error("Erro no upload da imagem: ", error);
     return undefined;
   }
+}
 
+export const postBolo = async (bolo: Bolo): Promise<void> => {
+  try {
+    await axios.post("http://localhost:3000/bolos", bolo);
+  } catch (error) {
+    console.error("Erro ao cadastrar o bolo", error);
+    throw error;
+  }
 }
