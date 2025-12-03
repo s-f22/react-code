@@ -19,3 +19,19 @@ export const deleteBolo = async (idBolo: string): Promise<void> => {
     throw error;
   }
 }
+
+export const enviarFotoParaAPI = async (file: File): Promise<string | undefined> => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const res = await axios.post("http://localhost:3000/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+    return res.data.filename;
+  } catch (error) {
+    console.error("Erro no upload da imagem: ", error);
+    return undefined;
+  }
+
+}
