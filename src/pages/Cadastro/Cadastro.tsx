@@ -7,6 +7,7 @@ import { deleteBolo, enviarFotoParaAPI, getBolos, postBolo } from '../../service
 import { formatosService } from '../../services/formatosService';
 import ModalCustomizado from '../../components/ModalCustomizado/ModalCustomizado';
 import { NumericFormat } from 'react-number-format';
+import EditIcon from '../../assets/pen-to-square.svg?react';
 
 export default function Cadastro() {
 
@@ -227,7 +228,7 @@ export default function Cadastro() {
               <label htmlFor="desc">Descrição</label>
               <textarea
                 id="desc"
-                maxLength={200}  
+                maxLength={200}
                 placeholder='Escreva detalhes sobre o bolo'
                 value={descricao}
                 onChange={d => setDescricao(d.target.value)}
@@ -249,6 +250,7 @@ export default function Cadastro() {
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th>Peso</th>
+                <th>Editar</th>
                 <th>Excluir</th>
               </tr>
             </thead>
@@ -261,6 +263,9 @@ export default function Cadastro() {
                     <td data-cell="Descrição: ">{b.descricao || "Não informado"}</td>
                     <td data-cell="Valor: "> {formatosService.PrecoBR(b.preco)} </td>
                     <td data-cell="Peso: "> {b.peso ? formatosService.PesoEmKg(b.peso) : "Não cadastrado"} </td>
+                    <td>
+                      <EditIcon height={26}  />
+                    </td>
                     <td>
                       <svg onClick={() => abrirModalParaConfirmarDelete(b.id!)} xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 640 640">
