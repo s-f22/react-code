@@ -1,65 +1,92 @@
+/* HEADER */
 header {
-  background-color: #FFD188;
+    background-color: var(--corPrincipal);
+    /* height: 80px; */
+    display: flex;
 }
 
-.container_cabecalho {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1440px;
-  /* background-color: aquamarine; */
-  margin: 0 auto;
-  height: 100%;
-  align-items: center;
+.container_geral {
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
-.conteudo-nav{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+.container_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.me-auto {
+    display: flex;
+    width: 100%;
+    /* background-color: blue; */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .icone_home {
-  height: 50px;
-  color: black;
+    width: 50px;
+    cursor: pointer;
+    color: black;
 }
 
-.box_busca {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
+.logo_header {
+    height: 60px;
+    cursor: pointer;
 }
 
-.icone_lupa {
-  height: 24px;
-  position: absolute;
-  left: 9px;
-  top: 9px;
-  fill: #b0b0b0;
+.busca {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
 }
 
-.logo {
-  height: 60px;
+.busca svg {
+    width: 26px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
 }
 
-.campo_busca {
-  width: 100%;
-  height: 42px;
-  border-radius: 10px;
-  border: solid 1px #cccccc;
-  padding-left: 2.5rem;
-  font-size: 1rem;
+.input-pesquisa {
+    height: 36px;
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 40px;
+}
+
+.botoes_direita {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: .5rem;
+}
+
+.add {
+    color: #000000;
+    cursor: pointer;
+    width: 25px;
+}
+
+.logout {
+    color: #000000;
+    cursor: pointer;
+    width: 40px;
+    background-color: var(--corPrincipal);
 }
 
 @media screen and (max-width: 768px) {
-  .me-auto{
-    align-items: end;
-  }
-  .logo{
-    margin: 1rem 0;
-  }
-  .icone_home{
-    margin-bottom: 5px;
-  }
+    .me-auto {
+        align-items: end;
+    }
+    .logo_header {
+        margin: 1rem 0 1rem 0;
+    }
+    .icone_home{
+        margin-bottom: 5px;
+    }
+    .botoes_direita{
+        margin-bottom: 1rem;
+    }
 }

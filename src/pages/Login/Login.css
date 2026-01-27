@@ -1,0 +1,9 @@
+body {
+  font-family: var(--fontComplementar);
+  background-color: var(--corBackground);
+}
+
+.card {
+  max-width: 500px;
+  margin: 0 1rem;
+}
