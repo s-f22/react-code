@@ -1,0 +1,31 @@
+.notfound{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.notfound img{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+.notfound h1{
+  text-align: center;
+}
+
+.notfound span{
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.notfound button{
+  max-width: 300px;
+  align-self: center;
+}

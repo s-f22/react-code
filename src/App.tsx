@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home"
 import Cadastro from "./pages/Cadastro/Cadastro"
 import RotaProtegida from "./components/RotaProtegida/RotaProtegida"
 import Login from "./pages/Login/Login"
+import NotFound from "./pages/NotFound/NotFound"
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
               <Cadastro />
             </RotaProtegida>
           } />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
