@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useEffect, useState, useRef, type ChangeEvent } from 'react';
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import './Cadastro.css'
@@ -26,12 +26,25 @@ export default function Cadastro() {
   const [descricao, setDescricao] = useState<string>("");
   const [bgImageInputColor, setBgImageInputColor] = useState<string>("#ffffff");
 
+  const topoRef = useRef<HTMLDivElement>(null);
+
+  const focarTopo = () => {
+    topoRef.current?.scrollIntoView({ behavior: "smooth" });
+    topoRef.current?.focus();
+  }
+
   const abrirModalParaConfirmarDelete = (id: string) => {
     setClicouNaLixeira(true);
     setIdParaDeletar(id);
   }
 
+  const cancelarEdicao = () => {
+    limparDados();
+    setIdParaEditar("");
+  }
+
   const editarBolo = (bolo: Bolo) => {
+    focarTopo();
     setIdParaEditar(bolo.id!);
 
     setNomeBolo(bolo.nome);
@@ -166,7 +179,7 @@ export default function Cadastro() {
           <h2>Cadastro</h2>
           <hr />
 
-          <div className="box_cadastro">
+          <div ref={topoRef} tabIndex={-1} className="box_cadastro">
             <div className="cadastro_coluna1">
               <div className="bolos">
                 <label htmlFor="bolo">Bolo</label>
@@ -263,9 +276,9 @@ export default function Cadastro() {
             </div>
           </div>
           <button className='botaoSubmit' type='submit'>
-            {idParaEditar ? "Atualizar" : "Cadastrar"}
+            {idParaEditar ? "Atualizar dados" : "Cadastrar"}
           </button>
-          {idParaEditar && <button className='botaoSubmit'>Cancelar</button>}
+          {idParaEditar && <button onClick={cancelarEdicao} className='botaoModalCancelar'>Cancelar edição</button>}
         </form>
 
         <section className="container_lista">
