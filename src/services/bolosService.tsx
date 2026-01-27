@@ -43,3 +43,15 @@ export const postBolo = async (bolo: Bolo): Promise<void> => {
     throw error;
   }
 }
+
+export const putBolo = async (bolo: Bolo): Promise<void> => {
+  try {
+    if (!bolo.id) {
+      throw new Error("ID do bolo não informado");
+    }
+    await axios.put(`http://localhost:3000/bolos/${bolo.id}`, bolo);
+  } catch (error) {
+    console.error("Erro ao atualizar o bolo", error);
+    throw error;
+  }
+}

@@ -3,7 +3,7 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import './Cadastro.css'
 import type { Bolo } from '../../types/Bolo';
-import { deleteBolo, enviarFotoParaAPI, getBolos, postBolo } from '../../services/bolosService';
+import { deleteBolo, enviarFotoParaAPI, getBolos, postBolo, putBolo } from '../../services/bolosService';
 import { formatosService } from '../../services/formatosService';
 import ModalCustomizado from '../../components/ModalCustomizado/ModalCustomizado';
 import { NumericFormat } from 'react-number-format';
@@ -14,11 +14,13 @@ export default function Cadastro() {
   const [bolos, setBolos] = useState<Bolo[]>([]);
   const [clicouNaLixeira, setClicouNaLixeira] = useState<boolean>(false);
   const [idParaDeletar, setIdParaDeletar] = useState<string>("");
+  const [idParaEditar, setIdParaEditar] = useState<string>("");
   const [aposConfirmacaoDeBoloRemovido, setAposConfirmacaoDeBoloRemovido] = useState<boolean>(false);
   const [propsModalDeErroOuSucesso, setPropsModalDeErroOuSucesso] = useState<{ exibir: boolean, titulo: string, corpo: string }>({ exibir: false, titulo: "", corpo: "" });
   const [nomeBolo, setNomeBolo] = useState<string>("");
   const [categorias, setCategorias] = useState<string>("");
-  const [imagem, setImagem] = useState<File | undefined>(undefined);
+  const [imagem, setImagem] = useState<File | undefined>();
+  const [nomeDaImagem, setNomeDaImagem] = useState<string | undefined>();
   const [preco, setPreco] = useState<number | undefined>(undefined);
   const [peso, setPeso] = useState<number | undefined>(undefined);
   const [descricao, setDescricao] = useState<string>("");
@@ -28,6 +30,21 @@ export default function Cadastro() {
     setClicouNaLixeira(true);
     setIdParaDeletar(id);
   }
+
+  const editarBolo = (bolo: Bolo) => {
+    setIdParaEditar(bolo.id!);
+
+    setNomeBolo(bolo.nome);
+    setDescricao(bolo.descricao ?? "");
+    setPreco(bolo.preco);
+    setPeso(bolo.peso ?? undefined);
+    setCategorias(bolo.categorias.join(", "));
+
+    setImagem(undefined);
+    setNomeDaImagem(bolo.imagens[0]);
+
+    setBgImageInputColor("#ffffff");
+  };
 
   const fecharModalConfirmacaoDelete = () => {
     setClicouNaLixeira(false);
@@ -55,7 +72,7 @@ export default function Cadastro() {
   const fetchBolos = async () => {
     try {
       const dados = await getBolos();
-      console.log(dados);
+      //console.log(dados);
       setBolos(dados);
     } catch (error) {
       console.error("Erro ao executar getBolos: ", error);
@@ -78,50 +95,60 @@ export default function Cadastro() {
     setNomeBolo("");
     setCategorias("");
     setImagem(undefined);
+    setNomeDaImagem(undefined);
     setPreco(undefined);
     setPeso(undefined);
     setDescricao("");
     setBgImageInputColor("#ffffff");
   }
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!nomeBolo || !categorias || !preco) {
-      exibirModalDeErroOuSucesso("Campos obrigatórios", "Preencha o nome, categorias e preço do bolo");
+      exibirModalDeErroOuSucesso(
+        "Campos obrigatórios",
+        "Preencha o nome, categorias e preço do bolo"
+      );
       return;
     }
 
-    let uploadedFileName: string | undefined;
+    let uploadedFileName = nomeDaImagem;
 
     if (imagem) {
       uploadedFileName = await enviarFotoParaAPI(imagem);
-      if (!uploadedFileName) {
-        exibirModalDeErroOuSucesso("Erro", "Cadastro cancelado por falha no upload da imagem.");
-        return;
-      }
     }
 
-    const novoBolo: Bolo = {
-      id: undefined,
+
+    const bolo: Bolo = {
+      id: idParaEditar || undefined,
       nome: nomeBolo,
-      descricao: descricao,
-      preco: preco,
+      descricao,
+      preco,
       peso: peso ?? null,
       categorias: categorias.toLowerCase().split(",").map(c => c.trim()),
       imagens: uploadedFileName ? [uploadedFileName] : []
-    }
+    };
 
     try {
-      await postBolo(novoBolo);
-      exibirModalDeErroOuSucesso("Sucesso", "Novo bolo cadastrado com sucesso!");
-      fetchBolos();
-      limparDados();
-    } catch (error) {
-      exibirModalDeErroOuSucesso("Erro", "Erro ao cadastrar o novo bolo");
-    }
+      if (idParaEditar) {
+        console.log("Entrou na edição", bolo);
+        await putBolo(bolo);
+        exibirModalDeErroOuSucesso("Sucesso", "Bolo atualizado!");
+      } else {
+        await postBolo(bolo);
+        exibirModalDeErroOuSucesso("Sucesso", "Novo bolo cadastrado!");
+      }
 
-  }
+      limparDados();
+      setIdParaEditar("");
+      fetchBolos();
+    } catch {
+      exibirModalDeErroOuSucesso("Erro", "Erro ao salvar o bolo");
+    }
+  };
+
 
   useEffect(() => {
     fetchBolos();
@@ -235,7 +262,10 @@ export default function Cadastro() {
               />
             </div>
           </div>
-          <button className='botaoSubmit' type='submit'>Cadastrar</button>
+          <button className='botaoSubmit' type='submit'>
+            {idParaEditar ? "Atualizar" : "Cadastrar"}
+          </button>
+          {idParaEditar && <button className='botaoSubmit'>Cancelar</button>}
         </form>
 
         <section className="container_lista">
@@ -264,7 +294,7 @@ export default function Cadastro() {
                     <td data-cell="Valor: "> {formatosService.PrecoBR(b.preco)} </td>
                     <td data-cell="Peso: "> {b.peso ? formatosService.PesoEmKg(b.peso) : "Não cadastrado"} </td>
                     <td>
-                      <EditIcon height={26}  />
+                      <EditIcon height={26} style={{ cursor: "pointer" }} onClick={() => editarBolo(b)} />
                     </td>
                     <td>
                       <svg onClick={() => abrirModalParaConfirmarDelete(b.id!)} xmlns="http://www.w3.org/2000/svg"
