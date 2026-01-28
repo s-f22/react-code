@@ -136,9 +136,10 @@ input[type="file"] {
 table {
   /* background-color: aquamarine; */
   width: 90%;
-  max-width: 1200px;
+  max-width: 1400px;
   text-align: center;
   border-collapse: collapse;
+
 }
 
 th {
@@ -148,7 +149,7 @@ th {
 }
 
 td {
-  padding: 12px 16px 6px 16px;
+  padding: 12px 32px 6px 32px;
   border-bottom: solid 2px #B3B3B350;
 }
 

@@ -30,14 +30,15 @@ export default function Produtos() {
         setBolos(dados_filtrados);
       }
       else if (termo_pesquisado) {
-        const dados_filtrados = dados.filter(b =>
-          b.nome.toLowerCase()
+        const dados_filtrados = dados.filter(
+          b => b.nome.toLowerCase()
             .includes(termo_pesquisado.toLowerCase()) ||
-          b.descricao.toLowerCase()
-            .includes(termo_pesquisado.toLowerCase()) ||
-          b.categorias.some(cat => cat.toLowerCase()
-            .includes(termo_pesquisado
-              .toLowerCase()))
+            b.descricao.toLowerCase()
+              .includes(termo_pesquisado.toLowerCase()) ||
+            b.categorias.some(
+              cat => cat.toLowerCase()
+                .includes(termo_pesquisado.toLowerCase())
+            )
         )
         setBolos(dados_filtrados)
       } else {
@@ -90,7 +91,7 @@ export default function Produtos() {
               ))
             }
             {
-              bolos.length == 0 && 
+              bolos.length == 0 &&
               <div className='jacquin404'>
                 <h3>O termo pesquisado <br />não foi encontrado</h3>
                 <img src={jacquin404} alt="foto_termo_nao_encontrado" />
