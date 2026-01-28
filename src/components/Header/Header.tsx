@@ -71,11 +71,13 @@ export default function Header() {
               isLoggedIn ? (
                 // 3/3: Se logado, botões para pg. Cadastro e Logout
                 <Nav.Item className='botoes_direita'>
-                  <Link to={"/produtos/cadastro"} title='Cadastrar novos bolos'>
-                    <AddIcon className="add" />
+                  <Link className='botoes' to={"/produtos/cadastro"} title='Cadastrar novos bolos'>
+                    <AddIcon height={26} className="add" />
+                    <span>Cadastrar</span>
                   </Link>
-                  <button onClick={handleLogout} title='Sair / Finalizar sessão'>
-                    <LogoutIcon className="logout" />
+                  <button className='botoes' onClick={handleLogout} title='Sair / Finalizar sessão'>
+                    <LogoutIcon height={26} className="logoutIcon" />
+                    <span>Logout</span>
                   </button>
                 </Nav.Item>
               ) : (

@@ -33,6 +33,7 @@ header {
 
 .logo_header {
     height: 60px;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -66,14 +67,26 @@ header {
 .add {
     color: #000000;
     cursor: pointer;
-    width: 25px;
 }
 
-.logout {
+.logoutIcon {
     color: #000000;
     cursor: pointer;
-    width: 40px;
     background-color: var(--corPrincipal);
+}
+
+.botoes{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.botoes span {
+    background-color: #ffd188; 
+    font-size: .7rem;
+    text-align: center;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {

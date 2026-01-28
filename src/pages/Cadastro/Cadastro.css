@@ -70,6 +70,7 @@
   border: solid 1px #B3B3B3;
   font-size: 18px;
   padding: 0 5px;
+  margin-bottom: 20px;
 }
 
 .box_cadastro input[type="text"] {
@@ -83,7 +84,7 @@
 
 .box_cadastro textarea {
   resize: none;
-  height: 200px;
+  height: 100%;
 }
 
 .botaoSubmit {
@@ -177,6 +178,10 @@ td {
   .cadastro_coluna1,
   .cadastro_coluna2 {
     width: 100%;
+  }
+
+  .box_cadastro textarea{
+    min-height: 150px;
   }
 
 

@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <main className="main_home">
         <section className="secao_logo">
-          <LogoBolosJacquinIcon />
+          <LogoBolosJacquinIcon className='secao_logo_svg' />
           <img src={foto_jacquin} alt="foto do jacquin" />
         </section>
 

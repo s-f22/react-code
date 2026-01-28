@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.secao_logo svg {
+.secao_logo_svg {
     width: 240px;
     margin-top: 50px;
 }
@@ -60,14 +60,7 @@
         width: 95%;
     }
 
-    .secao_logo{
-        position: relative;
-        margin-top: 50px;
-    }
-
-    .secao_logo svg{
-        position: absolute;
-        top: 230px;
+    .secao_logo_svg{
         background-color: #FFD188;
         padding: 10px 40px 5px;
         border-radius: 20px;
@@ -76,6 +69,7 @@
 
     .secao_logo img{
         width: 150px;
+        margin: 1rem 0;
     }
 
     .secao_cards{
