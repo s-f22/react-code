@@ -298,7 +298,7 @@ export default function Cadastro() {
             <tbody>
               {
                 bolos.map((b: Bolo) => (
-                  <tr>
+                  <tr key={b.id}>
                     <td data-cell="Bolo: ">{b.nome}</td>
                     <td data-cell="Categoria: "> {b.categorias.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(", ")} </td>
                     <td data-cell="Descrição: ">{b.descricao || "Não informado"}</td>

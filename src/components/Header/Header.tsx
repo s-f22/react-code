@@ -16,13 +16,13 @@ export default function Header() {
   const navigate = useNavigate();
 
   const isLoggedIn = useMemo(() => {
-    return !!Cookies.get('auth_hash'); // substituir pelo nome do cookie, caso diferente
+    return !!Cookies.get('auth_token');
   }, []);
 
   const handleLogout = () => {
-    Cookies.remove('auth_hash'); // Remove o cookie de autenticação; 
+    Cookies.remove('auth_token');
     navigate('/');
-    window.location.reload(); // Recarrega a página para forçar re-render (alternativo a um state global)
+    window.location.reload();
   };
 
 

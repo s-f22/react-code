@@ -15,19 +15,29 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/users?email=${email}&senha=${password}`
-      );
-      const data = await response.json();
+      const response = await fetch("http://localhost:5103/api/logins", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, senha: password })
+      });
 
-      if (data.length > 0) {
-        const authHash = btoa(email + Date.now());
-
-        Cookies.set("auth_hash", authHash, { expires: 1 / 24 }); // 1 hora
-        navigate("/produtos/cadastro");
-      } else {
+      if (!response.ok) {
         setError("Email ou senha incorretos.");
+        return;
       }
+
+      const data = await response.json();
+      const token = data?.token;
+
+      if (!token) {
+        setError("Erro ao obter token de autenticação.");
+        return;
+      }
+
+      Cookies.set("auth_token", token, { expires: 1 / 24 }); // 1 hora
+      navigate("/produtos/cadastro");
     } catch (err) {
       console.error("Erro ao fazer login:", err);
       setError("Erro ao conectar com o servidor.");
