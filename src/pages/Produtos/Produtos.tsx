@@ -52,7 +52,7 @@ export default function Produtos() {
 
   useEffect(() => {
     fetchBolos();
-    console.log("Termo pesquisado: ", termo_pesquisado);
+    // console.log("Termo pesquisado: ", termo_pesquisado);
   }, [termo_pesquisado])
 
 
