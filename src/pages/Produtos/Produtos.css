@@ -1,7 +1,6 @@
-
 .container_produtos {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1480px;
   margin: 0 auto;
 }
 
@@ -36,7 +35,12 @@
   white-space: nowrap;
 }
 
-
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
 
 
 /* CARDS */
@@ -66,7 +70,7 @@
   filter: drop-shadow(0 10px 2px #00000025);
 }
 
-.chat {
+.chat_icon {
   position: fixed;
   right: 30px;
   bottom: 120px;
@@ -74,36 +78,86 @@
     filter 0.5s ease-in-out;
 }
 
-.chat img {
+.chat_icon img {
   width: 80px;
   filter: drop-shadow(0 5px 1px #00000025);
 }
 
-.chat:hover {
+.chat_icon:hover {
   transform: scale(1.2);
   filter: drop-shadow(0 10px 2px #00000025);
 }
 
-.chat_div{
+.chat_box {
+  position: fixed;
+  bottom: 120px;
+  right: 40px;
+  width: 350px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 99
+}
+
+.chat_title {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
 
-.chat_div svg{
+.chat_title svg {
   height: 30px;
   cursor: pointer;
 }
 
-.jacquin404{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px
+.chat_container_conversa {
+  max-height: 350px;
+  overflow-y: auto;
+  margin-top: 10px;
 }
 
-.jacquin404 img{
-    height: 150px;
+.chat_container_conversa div {
+  margin-bottom: 8px;
+}
+
+.chat_container_conversa span {
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.chat_respondendo {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.chat_input {
+  margin: 1rem 0;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.chat_botao_enviar{
+  padding: 5px; 
+  font-size: 1rem; 
+  border-radius: 5px; 
+  background-color: #FFD188;
+}
+
+.jacquin404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px
+}
+
+.jacquin404 img {
+  height: 150px;
 }
 
 
@@ -125,5 +179,3 @@ footer p {
   font-family: "Julius Sans One", sans-serif;
   text-align: center;
 }
-
-
