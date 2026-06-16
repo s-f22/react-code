@@ -93,7 +93,7 @@
   bottom: 120px;
   right: 40px;
   width: 350px;
-  background: #fff;
+  background: #FFF6E8;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 10px;
@@ -126,6 +126,7 @@
   border-radius: 6px;
   display: inline-block;
   font-size: 1rem;
+  color: rgb(100, 100, 100);
 }
 
 .chat_respondendo {
@@ -143,7 +144,7 @@
 }
 
 .chat_botao_enviar{
-  padding: 5px; 
+  padding: 5px 10px; 
   font-size: 1rem; 
   border-radius: 5px; 
   background-color: #FFD188;

@@ -56,8 +56,8 @@ export default function Produtos() {
             {
               role: "system",
               content: `Você é um assistente que deve fornecer informações sobre os produtos de uma confeitaria.
-            Use os dados fornecidos no Catálogo completo de Produtos e mantenha o contexto da conversa. Caso não saiba responder alguma questão solicitada pelo usuário, peça para que ele procure ajuda em nosso canal de atendimento, via botão de whatsapp disponível na mesma tela, abaixo do chat onde você está funcionando.
-            Seja breve e direto nas respostas.`
+            Use os dados fornecidos no Catálogo completo de Produtos e mantenha o contexto da conversa. Caso não saiba responder alguma questão solicitada pelo usuário, peça para que ele procure ajuda em nosso canal de atendimento, via botão de whatsapp.
+            Seja breve e direto nas respostas. Não utilize markdown, apenas texto simples. Para preços, utilize R$ como unidade. Para pesos, utilize kg como unidade.`
             },
 
             ...novoHistorico,
@@ -76,7 +76,7 @@ export default function Produtos() {
       return data?.choices?.[0]?.message?.content || "Sem resposta da IA";
 
     } catch {
-      return "Erro ao consultar IA 😥";
+      return "Erro ao consultar IA";
     }
   };
 
@@ -171,7 +171,7 @@ export default function Produtos() {
           {
             carregandoProdutos ? (
               <div className="spinner-container">
-                <Spinner animation="border" role="status">
+                <Spinner animation="grow" role="status">
                   <span className="visually-hidden">Carregando...</span>
                 </Spinner>
               </div>
@@ -179,8 +179,9 @@ export default function Produtos() {
               <section className="cards">
 
                 {
-                  bolos.map((b: Bolo) => (
+                  bolos.map((b: Bolo, index: number) => (
                     <CardProduto
+                      key={index}
                       nome={b.nome}
                       descricao={b.descricao}
                       preco={b.preco}
@@ -230,7 +231,8 @@ export default function Produtos() {
                     textAlign: msg.role === "user" ? "right" : "left"
                   }}>
                     <span style={{
-                      background: msg.role === "user" ? "#d1e7ff" : "#f1f1f1",
+                      background: msg.role === "user" ? "#FFD188" : "#FFFFFF",
+                      border: "1px solid lightgray"
                     }}>
                       {msg.content}
                     </span>
